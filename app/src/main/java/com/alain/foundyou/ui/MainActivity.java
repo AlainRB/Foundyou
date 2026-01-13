@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
     private PersonListViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             // 'persons' es la List<Person> que llega desde el ViewModel
             // Aquí actualizas tu RecyclerView Adapter con la nueva lista.
             // Por ejemplo: personAdapter.submitList(persons);
-            Log.d("PersonListActivity", "La lista de personas se ha actualizado en la UI.");
+            Log.d("PersonListActivity", "Este es el nombre Leydisssss: ." + persons.get(0).getName().getFirst());
         });
 
         // Observador para el estado de carga
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             if (errorMessage != null && !errorMessage.isEmpty()) {
                 // Muestra el error en un Toast, Snackbar o TextView
                 // Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
-               Log.e("PersonListActivity", "Se ha recibido un error: " + errorMessage);
+                Log.e("PersonListActivity", "Se ha recibido un error: " + errorMessage);
             }
         });
     }

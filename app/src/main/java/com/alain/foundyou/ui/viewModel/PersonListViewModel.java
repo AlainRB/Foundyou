@@ -39,7 +39,7 @@ public class PersonListViewModel extends ViewModel {
         // Log para saber que el método se ha iniciado
       Log.d("AlAIN", "Iniciando la obtención de personas...");
 
-        personRepository.getRandomPersons(100)
+        personRepository.getRandomPersons(1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
