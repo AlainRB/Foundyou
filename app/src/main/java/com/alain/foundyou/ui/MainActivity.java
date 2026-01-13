@@ -1,4 +1,4 @@
-package com.alain.foundyou;
+package com.alain.foundyou.ui;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.alain.foundyou.R;
 
 public class MainActivity extends AppCompatActivity {
 
