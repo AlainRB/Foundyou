@@ -53,5 +53,14 @@ dependencies {
     //Detectar fugas de memoria en debug
     debugImplementation(libs.leakcanary.android)
 
+    // RxJava 3
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+// Adaptador de Retrofit para RxJava 3 en Hilt
+    implementation(libs.adapter.rxjava3)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
 }

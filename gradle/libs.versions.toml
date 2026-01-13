@@ -1,4 +1,5 @@
 [versions]
+adapterRxjava3 = "3.0.0"
 agp = "8.13.2"
 junit = "4.13.2"
 junitVersion = "1.3.0"
@@ -8,10 +9,14 @@ material = "1.13.0"
 activity = "1.12.2"
 constraintlayout = "2.2.1"
 hiltAndroidCompiler = "2.57.2"
+rxandroid = "3.0.2"
+rxjava = "3.1.12"
 securityCrypto = "1.1.0"
 leakcanaryAndroid = "2.14"
+retrofit = "3.0.0"
 
 [libraries]
+adapter-rxjava3 = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "adapterRxjava3" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -19,10 +24,15 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
+rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
 security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
