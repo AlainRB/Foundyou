@@ -15,6 +15,9 @@ public class PersonEntity {
     @ColumnInfo(name = "gender")
     public String gender;
 
+    @ColumnInfo(name = "title")
+    public String title;
+
     @ColumnInfo(name = "first_name")
     public String firstName;
 
@@ -50,11 +53,12 @@ public class PersonEntity {
     public String pictureThumbnail;
 
 
-    public PersonEntity(@NonNull String uuid, String gender, String firstName, String lastName,
+    public PersonEntity(@NonNull String uuid, String gender, String title,String firstName, String lastName,
                         String city, String country, String email, String dateOfBirth, String age,
                         String phone, String pictureLarge, String pictureMedium, String pictureThumbnail) {
         this.uuid = uuid;
         this.gender = gender;
+        this.title = title;
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;

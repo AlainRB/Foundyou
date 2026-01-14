@@ -56,12 +56,17 @@ public class PersonListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(post -> {
+        adapter.setOnItemClickListener(person -> {
             // Ahora tienes el objeto 'post' y el NavController en el mismo lugar.
 
             // Crea el Bundle para pasar los datos
             Bundle bundle = new Bundle();
-            bundle.putString("postTitle"," post.getTitle()");
+            bundle.putString("personName",person.getName().getTitle()+" "+person.getName().getFirst()+" "+person.getName().getLast());
+            bundle.putString("personEmail",person.getEmail());
+            bundle.putString("personPhone",person.getPhone());
+            bundle.putString("personBirthday",person.getDob().getDate());
+            bundle.putString("personCountry",person.getLocation().getCountry());
+            bundle.putString("personPicture",person.getPicture().getLarge());
 
 
             // Navega con el bundle

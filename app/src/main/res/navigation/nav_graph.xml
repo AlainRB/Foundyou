@@ -25,10 +25,6 @@
         android:label="Detalle de Persona"
         tools:layout="@layout/fragment_person_detail">
 
-        <!-- Argumento: El ID de la persona que se va a mostrar -->
-        <argument
-            android:name="personId"
-            app:argType="integer" />
     </fragment>
 
 </navigation>

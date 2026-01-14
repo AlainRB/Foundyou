@@ -1,5 +1,6 @@
 package com.alain.foundyou.ui.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +81,7 @@ public class PersonAdapter extends ListAdapter<Person, PersonAdapter.PersonViewH
             personEmail.setText(person.getEmail());
 
             Glide.with(itemView.getContext())
-                    .load(person.getPicture().getLarge()) // Usa la imagen que prefieras (large, medium, thumbnail)
+                    .load(person.getPicture().getThumbnail())
                     .circleCrop()
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .error(R.drawable.ic_launcher_foreground)

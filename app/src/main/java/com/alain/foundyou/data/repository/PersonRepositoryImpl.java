@@ -3,6 +3,9 @@ package com.alain.foundyou.data.repository;
 import com.alain.foundyou.data.database.dao.PersonDao;
 import com.alain.foundyou.data.database.entities.PersonEntity;
 import com.alain.foundyou.data.network.PersonApiService;
+import com.alain.foundyou.data.network.model.Dob;
+import com.alain.foundyou.data.network.model.Id;
+import com.alain.foundyou.data.network.model.Location;
 import com.alain.foundyou.data.network.model.Name;
 import com.alain.foundyou.data.network.model.Person;
 import com.alain.foundyou.data.network.model.Picture;
@@ -79,6 +82,7 @@ public class PersonRepositoryImpl implements PersonRepository {
                 // --- Datos principales ---
                 person.getLogin().getUuid(),
                 person.getGender(),
+                person.getName().getTitle(),
                 person.getName().getFirst(),
                 person.getName().getLast(),
                 person.getLocation().getCity(),
@@ -94,21 +98,47 @@ public class PersonRepositoryImpl implements PersonRepository {
     }
 
     // MAPEO INVERSO: ENTIDAD de BD -> DTO de API (Para exponer al ViewModel)
+
+    // MAPEO INVERSO: ENTIDAD de BD -> DTO de API (Para exponer al ViewModel)
     private List<Person> mapEntityListToApiList(List<PersonEntity> entityList) {
         return entityList.stream().map(entity -> {
             Person person = new Person();
-            person.setGender(entity.gender);
-            person.setEmail(entity.email);
-            person.setPhone(entity.phone);
             Name name = new Name();
+            name.setTitle(entity.title);
             name.setFirst(entity.firstName);
             name.setLast(entity.lastName);
-            person.setName(name);
+
             Picture picture = new Picture();
             picture.setLarge(entity.pictureLarge);
             picture.setMedium(entity.pictureMedium);
             picture.setThumbnail(entity.pictureThumbnail);
+
+            Dob dob = new Dob();
+            if (entity.dateOfBirth != null) {
+                dob.setDate(entity.dateOfBirth);
+            }
+            if (entity.age != null) {
+                try {
+                    dob.setAge(Integer.parseInt(entity.age));
+                } catch (NumberFormatException e) {
+                    dob.setAge(0);
+                }
+            }
+
+            person.setGender(entity.gender);
+            person.setEmail(entity.email);
+            person.setPhone(entity.phone);
+            person.setName(name);
             person.setPicture(picture);
+            person.setDob(dob);
+            Location location = new Location();
+            location.setCity(entity.city);
+            location.setCountry(entity.country);
+            person.setLocation(location);
+            Id id = new Id();
+            id.setValue(entity.uuid);
+            person.setId(id);
+
             return person;
         }).collect(Collectors.toList());
     }
