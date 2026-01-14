@@ -14,12 +14,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 @HiltViewModel
 public class PersonListViewModel extends ViewModel {
     private final PersonRepository personRepository;
+    private final CompositeDisposable disposables = new CompositeDisposable();
+
     private final MutableLiveData<List<Person>> _persons = new MutableLiveData<>();
     public final LiveData<List<Person>> persons = _persons;
 
@@ -28,47 +30,46 @@ public class PersonListViewModel extends ViewModel {
 
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
+
     @Inject
     public PersonListViewModel(PersonRepository personRepository) {
         this.personRepository = personRepository;
-        observePersons();
+        observePersonsFromRepository();
+        refreshData();
     }
 
-    private void observePersons() {
-
-        // Log para saber que el método se ha iniciado
-      Log.d("AlAIN", "Iniciando la obtención de personas...");
-
-        personRepository.getRandomPersons(1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> {
-                    _isLoading.setValue(true);
-                    // Log para el estado de carga
-                    Log.d("AlAIN", "Cargando... (isLoading = true)");
-                })
-                .doFinally(() -> {
-                    _isLoading.setValue(false);
-                    // Log para cuando finaliza la operación (con éxito o error)
-                   Log.d("AlAIN", "Operación finalizada. (isLoading = false)");
-                })
-                .subscribe(
-                        persons -> {
-                            _persons.setValue(persons);
-                            // 2. Log cuando la llamada es exitosa
-                            Log.d("AlAIN", "Personas recibidas con éxito. Cantidad: " + persons.size());
-                            // Opcional: Imprimir los datos de la primera persona para verificar
-                            if (!persons.isEmpty()) {
-                             Log.d("AlAIN", "Primera persona: " + persons.get(0).getName().getFirst());
-                            }
-                        },
-                        error -> {
-                            _error.setValue(error.getMessage());
-                            // 3. Log cuando ocurre un error
-                            Log.e("AlAIN", "Error al obtener personas: " + error.getMessage());
-                        }
-                );
+    private void observePersonsFromRepository() {
+        disposables.add(
+                // El repositorio ya nos da un flujo del tipo de dato que necesitamos (List<Person>)
+                personRepository.getPersons()// Devuelve Flowable<List<Person>>
+                        .subscribeOn(Schedulers.io())
+                        // .observeOn(AndroidSchedulers.mainThread()) // Es buena práctica cambiar al hilo principal antes de actualizar la UI
+                        .subscribe(
+                                personList -> _persons.postValue(personList), // ¡Directo! Sin mapeo.
+                                throwable -> _error.postValue("Error al leer los datos: " + throwable.getMessage())
+                        )
+        );
     }
 
+    public void refreshData() {
+        disposables.add(
+                personRepository.refreshPersons()
+                        .subscribeOn(Schedulers.io())
+                        .doOnSubscribe(disposable -> _isLoading.postValue(true))
+                        .doFinally(() -> _isLoading.postValue(false))
+                        .subscribe(
+                                () -> Log.d("ALAIN", "La operación de refresco se completó."),
+                                throwable -> {
+                                    Log.e("ALAIN", "Error en la operación de refresco: " + throwable.getMessage());
+                                    _error.postValue(throwable.getMessage());
+                                }
+                        )
+        );
+    }
 
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        disposables.clear(); // Muy importante para evitar memory leaks
+    }
 }

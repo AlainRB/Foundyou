@@ -5,12 +5,13 @@ import com.alain.foundyou.data.network.model.Person;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
 public interface PersonRepository {
-    Single<List<Person>> getRandomPersons(int count);
+    Flowable<List<Person>> getPersons();
     Single<List<Person>> getRandomPersonsByGender(int count, String gender);
     Single<Person> getRandomPersonWithPassword(int count, String passwordComplexity);
-    void refreshPersons();
+    Completable refreshPersons();
 }

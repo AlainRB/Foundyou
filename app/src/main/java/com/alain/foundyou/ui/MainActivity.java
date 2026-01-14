@@ -1,5 +1,7 @@
 package com.alain.foundyou.ui;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import android.util.Log;
 
@@ -38,35 +40,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupObservers() {
-        // Suponiendo que tienes un RecyclerView (recyclerView) y un ProgressBar (progressBar) en tu layout
 
-        // Observador para la lista de personas
-        viewModel.persons.observe(this, persons -> {
-            // 'persons' es la List<Person> que llega desde el ViewModel
-            // Aquí actualizas tu RecyclerView Adapter con la nueva lista.
-            // Por ejemplo: personAdapter.submitList(persons);
-            Log.d("PersonListActivity", "Este es el nombre Leydisssss: ." + persons.get(0).getName().getFirst());
+        // --- OBSERVADOR PARA LA LISTA DE PERSONAS ---
+        // Este se activará cada vez que la base de datos notifique un cambio y el ViewModel nos lo envíe.
+        viewModel.persons.observe(this, personList -> {
+            // Primero, comprobamos si la lista que llega es válida y no está vacía.
+            if (personList != null && !personList.isEmpty()) {
+
+                // ¡ESTA ES TU PRUEBA DEFINITIVA!
+                // Si este log aparece, significa que los datos se guardaron en la BD,
+                // se leyeron, se procesaron y llegaron correctamente a la UI.
+                Log.i("BD_TEST", ">>>>>> DATOS RECIBIDOS CORRECTAMENTE DESDE LA BASE DE DATOS <<<<<<");
+                Log.d("BD_TEST", "Número de personas en la lista: " + personList.size());
+
+                // Imprimimos el email de la PRIMERA persona como prueba específica.
+                String primerEmail = personList.get(0).getEmail();
+                Log.d("BD_TEST", "Email de la primera persona: " + primerEmail);
+
+                // Opcional: Imprimir toda la lista para ver todos los datos
+                for (int i = 0; i < personList.size(); i++) {
+                    String firstName = personList.get(i).getName().getFirst();
+                    Log.d("BD_TEST_LIST", "  -> Persona " + (i + 1) + ": " + firstName);
+                }
+                Log.i("BD_TEST", ">>>>>> FIN DE LA COMPROBACIÓN <<<<<<");
+
+            } else {
+                Log.w("BD_TEST", "La lista de personas está vacía. Esto es normal al iniciar la app antes de la primera carga.");
+            }
         });
 
-        // Observador para el estado de carga
+        // --- Observadores de Carga y Error (ya los tienes bien) ---
         viewModel.isLoading.observe(this, isLoading -> {
-            // Muestra u oculta tu ProgressBar (o cualquier indicador de carga)
-            // if (isLoading) {
-            //     progressBar.setVisibility(View.VISIBLE);
-            // } else {
-            //     progressBar.setVisibility(View.GONE);
-            // }
-            Log.d("PersonListActivity", "El estado de carga es: " + isLoading);
+            Log.d("BD_TEST", "[Estado de Carga]: " + (isLoading ? "CARGANDO..." : "FINALIZADO"));
         });
 
-        // Observador para los errores
         viewModel.error.observe(this, errorMessage -> {
-            // Si el mensaje no es nulo o vacío, muéstralo al usuario
             if (errorMessage != null && !errorMessage.isEmpty()) {
-                // Muestra el error en un Toast, Snackbar o TextView
-                // Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
-                Log.e("PersonListActivity", "Se ha recibido un error: " + errorMessage);
+                Log.e("BD_TEST", "¡ERROR DETECTADO!: " + errorMessage);
             }
         });
     }
+
 }
