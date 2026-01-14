@@ -1,0 +1,35 @@
+<!-- res/navigation/main_nav_graph.xml -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/personListFragment"> <!-- Esta es la pantalla de inicio -->
+
+    <!-- Fragmento que muestra la lista de personas -->
+    <fragment
+        android:id="@+id/personListFragment"
+        android:name="com.alain.foundyou.ui.fragment.PersonListFragment"
+        android:label="Personas Encontradas"
+        tools:layout="@layout/fragment_person_list">
+
+        <!-- Acción para ir desde la lista al detalle -->
+        <action
+            android:id="@+id/action_personListFragment_to_personDetailFragment"
+            app:destination="@id/personDetailFragment" />
+    </fragment>
+
+    <!-- Fragmento que muestra el detalle de una persona -->
+    <fragment
+        android:id="@+id/personDetailFragment"
+        android:name="com.alain.foundyou.ui.fragment.PersonDetailFragment"
+        android:label="Detalle de Persona"
+        tools:layout="@layout/fragment_person_detail">
+
+        <!-- Argumento: El ID de la persona que se va a mostrar -->
+        <argument
+            android:name="personId"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>
+    

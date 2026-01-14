@@ -11,6 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.alain.foundyou.R;
 import com.alain.foundyou.ui.viewModel.PersonListViewModel;
@@ -20,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
     private PersonListViewModel viewModel;
-
+    private NavController navController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +35,9 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // 1. Obtiene la instancia del ViewModel
-        viewModel = new ViewModelProvider(this).get(PersonListViewModel.class);
 
-        // 2. Llama a un método para configurar los observadores
-        setupObservers();
+        //viewModel = new ViewModelProvider(this).get(PersonListViewModel.class);
+       // setupObservers();
     }
 
     private void setupObservers() {
@@ -79,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("BD_TEST", "¡ERROR DETECTADO!: " + errorMessage);
             }
         });
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        // Permite al NavController gestionar la navegación hacia atrás.
+        // Si no puede, utiliza el comportamiento por defecto de la actividad.
+        return navController.navigateUp() || super.onSupportNavigateUp();
     }
 
 }

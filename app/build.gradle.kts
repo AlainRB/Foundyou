@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.dagger.hilt.android)
+    alias(libs.plugins.androidx.navigation.safeargs)
 }
 
 android {
@@ -42,6 +43,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -71,4 +74,7 @@ dependencies {
 
     implementation("androidx.room:room-rxjava3:2.6.1")
 
+    implementation("com.github.bumptech.glide:glide:5.0.5")
+
+    implementation (libs.swiperefreshlayout)
 }
