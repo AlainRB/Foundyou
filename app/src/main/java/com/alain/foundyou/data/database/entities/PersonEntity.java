@@ -52,10 +52,16 @@ public class PersonEntity {
     @ColumnInfo(name = "picture_thumbnail")
     public String pictureThumbnail;
 
+    @ColumnInfo(name = "cell")
+    public String cell;
+
+    @ColumnInfo(name = "postcode")
+    public String postcode;
+
 
     public PersonEntity(@NonNull String uuid, String gender, String title,String firstName, String lastName,
                         String city, String country, String email, String dateOfBirth, String age,
-                        String phone, String pictureLarge, String pictureMedium, String pictureThumbnail) {
+                        String phone, String pictureLarge, String pictureMedium, String pictureThumbnail, String cell ,String postcode) {
         this.uuid = uuid;
         this.gender = gender;
         this.title = title;
@@ -70,5 +76,9 @@ public class PersonEntity {
         this.pictureLarge = pictureLarge;
         this.pictureMedium = pictureMedium;
         this.pictureThumbnail = pictureThumbnail;
+        this.cell = cell;
+        this.postcode = postcode;
+
+
     }
 }

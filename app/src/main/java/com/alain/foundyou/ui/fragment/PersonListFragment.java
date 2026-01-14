@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.alain.foundyou.R;
+import com.alain.foundyou.databinding.FragmentPersonListBinding;
 import com.alain.foundyou.ui.adapter.PersonAdapter;
 import com.alain.foundyou.ui.viewModel.PersonListViewModel;
 
@@ -26,23 +27,23 @@ public class PersonListFragment extends Fragment {
     private PersonListViewModel viewModel;
     private RecyclerView recyclerView;
     private PersonAdapter adapter;
-    private NavController navController;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private FragmentPersonListBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_person_list, container, false);
+        binding = FragmentPersonListBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        navController = Navigation.findNavController(view);
-        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-        recyclerView = view.findViewById(R.id.recycler_view_persons);
+        swipeRefreshLayout = binding.swipeRefreshLayout;
+        recyclerView = binding.recyclerViewPersons;
+
         viewModel = new ViewModelProvider(requireActivity()).get(PersonListViewModel.class);
 
         setupRecyclerView(view);
@@ -67,9 +68,13 @@ public class PersonListFragment extends Fragment {
             bundle.putString("personBirthday",person.getDob().getDate());
             bundle.putString("personCountry",person.getLocation().getCountry());
             bundle.putString("personPicture",person.getPicture().getLarge());
+            bundle.putString("personCell",person.getCell());
+            bundle.putString("personCity",person.getLocation().getCity());
+            bundle.putString("personGender",person.getGender());
+            bundle.putString("personAge", String.valueOf(person.getDob().getAge()));
+            bundle.putString("personPostcode",person.getLocation().getPostcode());
 
 
-            // Navega con el bundle
             Navigation.findNavController(view).navigate(R.id.action_personListFragment_to_personDetailFragment, bundle);
         });
     }
@@ -77,7 +82,7 @@ public class PersonListFragment extends Fragment {
     private void setupSwipeToRefresh() {
         swipeRefreshLayout.setOnRefreshListener(() -> {
             // Esta es la acción que se ejecuta cuando el usuario "tira para refrescar"
-            Log.d("API_FETCH", "Swipe to refresh activado. Forzando actualización desde la API.");
+            Log.d("API_FETCH", getString(R.string.log_swipe_refresh));
             viewModel.refreshData(); // Necesitarás crear este método en tu ViewModel
         });
     }
@@ -88,25 +93,25 @@ public class PersonListFragment extends Fragment {
         viewModel.persons.observe(getViewLifecycleOwner(), personList -> {
             if (personList != null) {
                 adapter.submitList(personList); // ListAdapter actualiza la UI eficientemente
-                Log.i("BD_TEST", "Datos de la BD actualizados en el RecyclerView. " + personList.size() + " personas.");
+                Log.i("BD_TEST", String.format(getString(R.string.log_db_updated), personList.size()));
             }
         });
 
         // --- OBSERVADOR DE ESTADO DE CARGA ---
         // Gestiona la visibilidad del indicador de carga del SwipeRefreshLayout
-        viewModel.isLoading.observe(getViewLifecycleOwner(), isLoading -> {
-            // Solo mostramos el ProgressBar inicial si no hay datos en el adapter
-            swipeRefreshLayout.setRefreshing(isLoading);
-            Log.d("BD_TEST", "[Estado de Carga]: " + (isLoading ? "CARGANDO..." : "FINALIZADO"));
-        });
+        viewModel.isLoading.observe(getViewLifecycleOwner(), isLoading -> swipeRefreshLayout.setRefreshing(isLoading));
 
         // --- OBSERVADOR DE ERRORES ---
         viewModel.error.observe(getViewLifecycleOwner(), errorMessage -> {
             if (errorMessage != null && !errorMessage.isEmpty()) {
-                Toast.makeText(getContext(), "Error: " + errorMessage, Toast.LENGTH_LONG).show();
-                Log.e("BD_TEST", "¡ERROR DETECTADO!: " + errorMessage);
+                Toast.makeText(getContext(), String.format(getString(R.string.error_toast), errorMessage), Toast.LENGTH_LONG).show();
             }
         });
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

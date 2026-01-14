@@ -12,34 +12,52 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.alain.foundyou.R;
-import com.alain.foundyou.ui.viewModel.PersonListViewModel;
+import com.alain.foundyou.databinding.FragmentPersonDetailBinding;
 import com.bumptech.glide.Glide;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class PersonDetailFragment extends Fragment {
-    private PersonListViewModel viewModel;
+
+    private FragmentPersonDetailBinding binding;
     private ImageView detailImage;
     private TextView detailName;
     private TextView detailEmail;
     private TextView detailPhone;
     private TextView detailBirthday;
     private TextView detailCountry;
+    private TextView detailCell;
+    private TextView detailCity;
+    private TextView detailGender;
+    private TextView detailAge;
+    private TextView detailPostcode;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_person_detail, container, false);
+        binding = FragmentPersonDetailBinding.inflate(inflater, container, false);
 
-        detailImage = view.findViewById(R.id.detail_image);
-        detailName = view.findViewById(R.id.detail_name);
-        detailEmail = view.findViewById(R.id.detail_email);
-        detailPhone = view.findViewById(R.id.detail_phone);
-        detailBirthday = view.findViewById(R.id.detail_birthday);
-        detailCountry = view.findViewById(R.id.detail_country);
-        return view;
+        detailImage = binding.detailImage;
+        detailName = binding.detailName;
+        detailEmail = binding.detailEmail;
+        detailPhone = binding.detailPhone;
+        detailBirthday = binding.detailBirthday;
+        detailCountry = binding.detailCountry;
+        detailCell = binding.detailCell;
+        detailCity = binding.detailCity;
+        detailGender = binding.detailGender;
+        detailAge = binding.detailAge;
+        detailPostcode = binding.detailPostcode;
+
+        return binding.getRoot();
     }
 
     @Override
@@ -47,28 +65,65 @@ public class PersonDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
-            String personName = getArguments().getString("personName", "Sin nombre");
-            String personEmail = getArguments().getString("personEmail", "Sin correo");
-            String personPhone = getArguments().getString("personPhone", "Sin teléfono");
-            String personBirthday = getArguments().getString("personBirthday", "Sin cumpleaños");
-            String personCountry = getArguments().getString("personCountry", "Sin país");
-            String personPicture = getArguments().getString("personPicture", null); // Usa null como default
+            String personName = getArguments().getString("personName", getString(R.string.person_no_name));
+            String personEmail = getArguments().getString("personEmail", getString(R.string.person_no_email));
+            String personPhone = getArguments().getString("personPhone", getString(R.string.person_no_phone));
+            String personBirthday = formatBirthday(getArguments().getString("personBirthday", getString(R.string.person_no_birthday)));
+            String personCountry = getArguments().getString("personCountry", getString(R.string.person_no_country));
+            String personPicture = getArguments().getString("personPicture", null);
+            String personCell = getArguments().getString("personCell", getString(R.string.person_no_cell));
+            String personCity = getArguments().getString("personCity", getString(R.string.person_no_city));
+            String personGender = getArguments().getString("personGender", getString(R.string.person_no_gender));
+            String personAge = getArguments().getString("personAge", getString(R.string.person_no_age));
+            String personPostcode = getArguments().getString("personPostcode", getString(R.string.person_no_postcode));
 
-            // 3. Asigna los datos a las vistas correctas
+
             detailName.setText(personName);
             detailEmail.setText(personEmail);
             detailPhone.setText(personPhone);
             detailBirthday.setText(personBirthday);
             detailCountry.setText(personCountry);
+            detailCell.setText(personCell);
+            detailCity.setText(personCity);
+            detailGender.setText(personGender);
+            detailAge.setText(String.format(getString(R.string.person_years_suffix), personAge));
+            detailPostcode.setText(String.format(getString(R.string.person_postcode_prefix), personPostcode));
 
-            // 4. Carga la imagen principal con Glide y su placeholder
+            // Cargar la imagen con Glide
+
+
             Glide.with(this)
                     .load(personPicture)
+                    .circleCrop()
                     .placeholder(R.drawable.nopersona) // Placeholder desde tu XML (tools:src)
                     .error(R.drawable.nopersona)       // Imagen de error si la URL falla
                     .into(detailImage);
         }
 
     }
+
+    private String formatBirthday(String fechaNacimiento) {
+        if (fechaNacimiento == null || fechaNacimiento.isEmpty()) {
+            return getString(R.string.person_no_birthday);
+        }
+        // Formato para parsear la fecha de entrada
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+        inputFormat.setTimeZone(TimeZone.getTimeZone("UTC")); // La 'Z' indica zona horaria UTC
+
+        // Formato para la fecha de salida
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        try {
+            Date date = inputFormat.parse(fechaNacimiento);
+            if (date != null) {
+                return outputFormat.format(date);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return getString(R.string.person_invalid_date);
+        }
+        return getString(R.string.person_no_birthday);
+    }
+
 
 }

@@ -1,177 +1,295 @@
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".ui.fragment.PersonDetailFragment">
 
+    <!-- ELEMENTOS FIJOS SUPERIORES (Sin cambios) -->
     <ImageView
         android:id="@+id/detail_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/content_description_profile_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/nopersona" />
 
-    <ImageView
-        android:id="@+id/person_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="144dp"
-        android:src="@drawable/persona"
-        android:tint="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/detail_name"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/mail_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/mail"
-        android:tint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/person_image"
-        app:layout_constraintTop_toBottomOf="@+id/person_image" />
-
-    <ImageView
-        android:id="@+id/country_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/country"
-        android:tint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/birthay_image"
-        app:layout_constraintTop_toBottomOf="@+id/birthay_image" />
-
-    <ImageView
-        android:id="@+id/phone_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/phone"
-        android:tint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/mail_image"
-        app:layout_constraintTop_toBottomOf="@+id/mail_image" />
-
-    <ImageView
-        android:id="@+id/birthay_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/birthay"
-        android:tint="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/phone_image"
-        app:layout_constraintTop_toBottomOf="@+id/phone_image" />
-
-    <ImageView
-        android:id="@+id/qr_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/qr"
-        android:tint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/country_image" />
-
     <TextView
         android:id="@+id/detail_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/detail_image"
-        app:layout_constraintHorizontal_bias="0.376"
-        app:layout_constraintStart_toStartOf="@+id/detail_image"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_image"
-        tools:text="Alain Rodriguez Brizuela" />
+        tools:text="@string/tools_text_sample_name" />
 
-    <TextView
-        android:id="@+id/detail_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="44dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/detail_name"
-        app:layout_constraintHorizontal_bias="0.141"
-        app:layout_constraintStart_toEndOf="@+id/mail_image"
-        app:layout_constraintTop_toBottomOf="@+id/detail_name"
-        tools:text="abrizuela@casfid.com" />
-
-    <TextView
-        android:id="@+id/detail_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="52dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/detail_email"
-        app:layout_constraintHorizontal_bias="0.219"
-        app:layout_constraintStart_toEndOf="@+id/phone_image"
-        app:layout_constraintTop_toBottomOf="@+id/detail_email"
-        tools:text="+34 697 78 54 89" />
-
-    <TextView
-        android:id="@+id/detail_birthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="64dp"
-
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/detail_phone"
-        app:layout_constraintHorizontal_bias="0.278"
-        app:layout_constraintStart_toEndOf="@+id/birthay_image"
-        app:layout_constraintTop_toBottomOf="@+id/detail_phone"
-        tools:text="15/04/1979" />
-
-    <TextView
-        android:id="@+id/detail_country"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-
-        android:layout_marginTop="28dp"
-
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/detail_birthday"
-        app:layout_constraintHorizontal_bias="0.235"
-        app:layout_constraintStart_toEndOf="@+id/country_image"
-        app:layout_constraintTop_toBottomOf="@+id/detail_birthday"
-        tools:text="Cuba" />
-
+    <!-- ELEMENTOS FIJOS INFERIORES (Sin cambios) -->
     <TextView
         android:id="@+id/detail_addcontact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-
-        android:layout_marginTop="48dp"
-
-        android:textSize="18sp"
+        android:text="@string/add_contact_to_agenda"
+        android:textAppearance="?attr/textAppearanceBody2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/qr_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/content_description_qr_code"
+        android:src="@drawable/qr"
+        app:layout_constraintBottom_toTopOf="@+id/detail_addcontact"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/country_image"
-        tools:text="Agregar Contacto a la Agenda" />
+        app:tint="?attr/colorOnSurface" />
+
+    <ScrollView
+        android:id="@+id/details_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/qr_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_name">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/mail_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/content_description_email_icon"
+                android:src="@drawable/mail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorPrimary" />
+
+
+            <ImageView
+                android:id="@+id/phone_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_phone_icon"
+                android:src="@drawable/phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mail_image"
+                app:tint="?attr/colorPrimary" />
+
+
+            <ImageView
+                android:id="@+id/cell_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_cell_icon"
+                android:src="@drawable/cell"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone_image"
+                app:tint="?attr/colorPrimary" />
+
+
+            <ImageView
+                android:id="@+id/country_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_country_icon"
+                android:src="@drawable/country"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cell_image"
+                app:tint="?attr/colorPrimary" />
+
+
+            <ImageView
+                android:id="@+id/city_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_city_icon"
+                android:src="@drawable/city"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/country_image"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/postcode_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_postcode_icon"
+                android:src="@drawable/potcode"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/city_image"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/gender_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_gender_icon"
+                android:src="@drawable/genero"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postcode_image"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/age_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_age_icon"
+                android:src="@drawable/age"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gender_image"
+                app:tint="?attr/colorPrimary" />
+
+            <!-- (Opcional) Cumpleaños - lo he dejado fuera porque no lo pediste, pero puedes moverlo aquí si quieres -->
+            <ImageView
+                android:id="@+id/birthay_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_birthday_icon"
+                android:src="@drawable/birthay"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age_image"
+                app:tint="?attr/colorPrimary" />
+
+
+            <!-- BARRIER ACTUALIZADO con todos los iconos en orden -->
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/icon_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="mail_image,phone_image,cell_image,country_image,city_image,postcode_image,gender_image,age_image,birthay_image" />
+
+            <!-- TEXTVIEWS -->
+            <TextView
+                android:id="@+id/detail_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/mail_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/mail_image"
+                tools:text="@string/tools_text_sample_email" />
+
+            <TextView
+                android:id="@+id/detail_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/phone_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/phone_image"
+                tools:text="@string/tools_text_sample_phone" />
+
+            <TextView
+                android:id="@+id/detail_cell"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/cell_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/cell_image"
+                tools:text="@string/tools_text_sample_cell" />
+
+            <TextView
+                android:id="@+id/detail_country"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/country_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/country_image"
+                tools:text="@string/tools_text_sample_country" />
+
+            <TextView
+                android:id="@+id/detail_city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/city_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/city_image"
+                tools:text="@string/tools_text_sample_city" />
+
+            <TextView
+                android:id="@+id/detail_postcode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/postcode_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/postcode_image"
+                tools:text="@string/tools_text_sample_postcode" />
+
+            <TextView
+                android:id="@+id/detail_gender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/gender_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/gender_image"
+                tools:text="@string/tools_text_sample_gender" />
+
+            <TextView
+                android:id="@+id/detail_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/age_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/age_image"
+                tools:text="@string/tools_text_sample_age" />
+
+            <TextView
+                android:id="@+id/detail_birthday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/birthay_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/birthay_image"
+                tools:text="@string/tools_text_sample_birthday" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
-    

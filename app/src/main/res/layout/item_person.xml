@@ -22,7 +22,7 @@
             android:src="@drawable/ic_launcher_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" /> <!-- Añadir el  este string en res/values/strings.xml -->
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_person_name"

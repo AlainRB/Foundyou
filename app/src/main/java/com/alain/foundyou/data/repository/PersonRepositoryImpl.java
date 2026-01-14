@@ -93,7 +93,9 @@ public class PersonRepositoryImpl implements PersonRepository {
                 person.getPhone(),
                 person.getPicture().getLarge(),
                 person.getPicture().getMedium(),
-                person.getPicture().getThumbnail()
+                person.getPicture().getThumbnail(),
+                person.getCell(),
+                person.getLocation().getPostcode()
         );
     }
 
@@ -134,10 +136,13 @@ public class PersonRepositoryImpl implements PersonRepository {
             Location location = new Location();
             location.setCity(entity.city);
             location.setCountry(entity.country);
+            location.setPostcode(entity.postcode);
             person.setLocation(location);
             Id id = new Id();
             id.setValue(entity.uuid);
             person.setId(id);
+            person.setCell(entity.cell);
+
 
             return person;
         }).collect(Collectors.toList());
