@@ -14,6 +14,7 @@ rxjava = "3.1.12"
 securityCrypto = "1.1.0"
 leakcanaryAndroid = "2.14"
 retrofit = "3.0.0"
+coreSplashscreen = "1.2.0"
 
 [libraries]
 adapter-rxjava3 = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "adapterRxjava3" }
@@ -32,9 +33,9 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroidCompiler" }
-

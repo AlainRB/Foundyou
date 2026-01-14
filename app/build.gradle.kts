@@ -45,6 +45,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
     // Seguridad
     implementation(libs.security.crypto)
     //Inyeccion de dependencias

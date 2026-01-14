@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,10 +18,15 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
+
     private PersonListViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // 1. Instalar el Splash Screen antes de super.onCreate
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -30,42 +36,37 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // 1. Obtiene la instancia del ViewModel
+        // 2. Obtiene la instancia del ViewModel
         viewModel = new ViewModelProvider(this).get(PersonListViewModel.class);
 
-        // 2. Llama a un método para configurar los observadores
+        // 3. Configurar la condición para mantener el Splash Screen en pantalla
+        // Se mantendrá visible mientras 'isLoading' sea true o sea null (estado inicial)
+        splashScreen.setKeepOnScreenCondition(() -> {
+            Boolean isLoading = viewModel.isLoading.getValue();
+            return isLoading == null || isLoading;
+        });
+
+        // 4. Llama a un método para configurar los observadores
         setupObservers();
     }
 
     private void setupObservers() {
-        // Suponiendo que tienes un RecyclerView (recyclerView) y un ProgressBar (progressBar) en tu layout
-
         // Observador para la lista de personas
         viewModel.persons.observe(this, persons -> {
-            // 'persons' es la List<Person> que llega desde el ViewModel
-            // Aquí actualizas tu RecyclerView Adapter con la nueva lista.
-            // Por ejemplo: personAdapter.submitList(persons);
-            Log.d("PersonListActivity", "Este es el nombre Leydisssss: ." + persons.get(0).getName().getFirst());
+            if (persons != null && !persons.isEmpty()) {
+                Log.d("PersonListActivity", "Respuesta recibida: " + persons.get(0).getName().getFirst());
+            }
         });
 
-        // Observador para el estado de carga
+        // Observador para el estado de carga (opcional si ya usas setKeepOnScreenCondition)
         viewModel.isLoading.observe(this, isLoading -> {
-            // Muestra u oculta tu ProgressBar (o cualquier indicador de carga)
-            // if (isLoading) {
-            //     progressBar.setVisibility(View.VISIBLE);
-            // } else {
-            //     progressBar.setVisibility(View.GONE);
-            // }
             Log.d("PersonListActivity", "El estado de carga es: " + isLoading);
         });
 
         // Observador para los errores
         viewModel.error.observe(this, errorMessage -> {
-            // Si el mensaje no es nulo o vacío, muéstralo al usuario
             if (errorMessage != null && !errorMessage.isEmpty()) {
-                // Muestra el error en un Toast, Snackbar o TextView
-                // Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
-                Log.e("PersonListActivity", "Se ha recibido un error: " + errorMessage);
+                Log.e("PersonListActivity", "Error: " + errorMessage);
             }
         });
     }
