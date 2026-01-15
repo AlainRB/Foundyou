@@ -1,7 +1,5 @@
 package com.alain.foundyou.ui.viewModel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -60,9 +58,8 @@ public class PersonListViewModel extends ViewModel {
                         .doOnSubscribe(disposable -> _isLoading.postValue(true))
                         .doFinally(() -> _isLoading.postValue(false))
                         .subscribe(
-                                () -> Log.d("ALAIN", "La operación de refresco se completó."),
+                                () -> { /* La operación de refresco se completó. */ },
                                 throwable -> {
-                                    Log.e("ALAIN", "Error en la operación de refresco: " + throwable.getMessage());
                                     _error.postValue(throwable.getMessage());
                                 }
                         )

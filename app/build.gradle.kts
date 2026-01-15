@@ -79,4 +79,8 @@ dependencies {
     implementation(libs.glide)
 
     implementation (libs.swiperefreshlayout)
+
+    // Testing
+    testImplementation("org.mockito:mockito-core:4.5.1")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
 }
