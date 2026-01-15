@@ -48,6 +48,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
     // Seguridad
     implementation(libs.security.crypto)
     //Inyeccion de dependencias
@@ -66,15 +68,15 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation(libs.logging.interceptor)
 
     // Room
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
 
-    implementation("androidx.room:room-rxjava3:2.6.1")
+    implementation(libs.androidx.room.rxjava3)
 
-    implementation("com.github.bumptech.glide:glide:5.0.5")
+    implementation(libs.glide)
 
     implementation (libs.swiperefreshlayout)
 }

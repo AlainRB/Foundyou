@@ -7,4 +7,16 @@
     </style>
 
     <style name="Theme.FoundYou" parent="Base.Theme.FoundYou" />
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- El fondo del splash -->
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <!-- Tu icono -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon_splash</item>
+        <!-- Duración (opcional para iconos estáticos) -->
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <!-- Tema al que cambiará después del splash -->
+        <item name="postSplashScreenTheme">@style/Theme.FoundYou</item>
+    </style>
+
 </resources>

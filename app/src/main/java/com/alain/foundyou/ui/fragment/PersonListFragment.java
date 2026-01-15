@@ -25,9 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class PersonListFragment extends Fragment {
     private PersonListViewModel viewModel;
-    private RecyclerView recyclerView;
     private PersonAdapter adapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private FragmentPersonListBinding binding;
 
     @Override
@@ -41,8 +39,6 @@ public class PersonListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        swipeRefreshLayout = binding.swipeRefreshLayout;
-        recyclerView = binding.recyclerViewPersons;
 
         viewModel = new ViewModelProvider(requireActivity()).get(PersonListViewModel.class);
 
@@ -52,10 +48,10 @@ public class PersonListFragment extends Fragment {
 
     }
 
-    private void setupRecyclerView(View view) {
+    private void setupRecyclerView() {
         adapter = new PersonAdapter();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+        binding.recyclerViewPersons.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerViewPersons.setAdapter(adapter);
 
         adapter.setOnItemClickListener(person -> {
             // Ahora tienes el objeto 'post' y el NavController en el mismo lugar.
@@ -74,16 +70,17 @@ public class PersonListFragment extends Fragment {
             bundle.putString("personAge", String.valueOf(person.getDob().getAge()));
             bundle.putString("personPostcode",person.getLocation().getPostcode());
 
+            if (getView() != null) {
+                Navigation.findNavController(getView()).navigate(R.id.action_personListFragment_to_personDetailFragment, bundle);
+            }
 
-            Navigation.findNavController(view).navigate(R.id.action_personListFragment_to_personDetailFragment, bundle);
         });
     }
 
     private void setupSwipeToRefresh() {
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            // Esta es la acción que se ejecuta cuando el usuario "tira para refrescar"
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
             Log.d("API_FETCH", getString(R.string.log_swipe_refresh));
-            viewModel.refreshData(); // Necesitarás crear este método en tu ViewModel
+            viewModel.refreshData();
         });
     }
 
@@ -99,7 +96,7 @@ public class PersonListFragment extends Fragment {
 
         // --- OBSERVADOR DE ESTADO DE CARGA ---
         // Gestiona la visibilidad del indicador de carga del SwipeRefreshLayout
-        viewModel.isLoading.observe(getViewLifecycleOwner(), isLoading -> swipeRefreshLayout.setRefreshing(isLoading));
+        viewModel.isLoading.observe(getViewLifecycleOwner(), isLoading -> binding.swipeRefreshLayout.setRefreshing(isLoading));
 
         // --- OBSERVADOR DE ERRORES ---
         viewModel.error.observe(getViewLifecycleOwner(), errorMessage -> {
