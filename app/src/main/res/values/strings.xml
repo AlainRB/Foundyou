@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Found You</string>
+
+    <string name="person_no_name">Sin nombre</string>
+    <string name="person_no_email">Sin correo</string>
+    <string name="person_no_phone">Sin teléfono</string>
+    <string name="person_no_birthday">Sin cumpleaños</string>
+    <string name="person_no_country">Sin país</string>
+    <string name="person_no_cell">Sin celular</string>
+    <string name="person_no_city">Sin ciudad</string>
+    <string name="person_no_gender">Sin género</string>
+    <string name="person_no_age">Sin edad</string>
+    <string name="person_no_postcode">Sin código postal</string>
+    <string name="person_years_suffix">%s años</string>
+    <string name="person_postcode_prefix">código postal: %s</string>
+    <string name="person_invalid_date">Fecha inválida</string>
+
+    <!-- Person List Fragment -->
+    <string name="log_swipe_refresh">Swipe to refresh activado. Forzando actualización desde la API.</string>
+    <string name="log_db_updated">Datos de la BD actualizados en el RecyclerView. %d personas.</string>
+    <string name="error_toast">Error: %s</string>
+
+
+    <!-- fragment_person_detail.xml -->
+    <string name="content_description_profile_image">Imagen de perfil</string>
+    <string name="add_contact_to_agenda">Agregar Contacto</string>
+    <string name="content_description_qr_code">QR para agregar usuario</string>
+    <string name="content_description_email_icon">Email</string>
+    <string name="content_description_phone_icon">Telefono</string>
+    <string name="content_description_cell_icon">Celular</string>
+    <string name="content_description_country_icon">País</string>
+    <string name="content_description_city_icon">Ciudad</string>
+    <string name="content_description_postcode_icon">Código Postal</string>
+    <string name="content_description_gender_icon">Género</string>
+    <string name="content_description_age_icon">Edad</string>
+    <string name="content_description_birthday_icon">Cumpleaños</string>
+
+    <!-- tools:text for fragment_person_detail.xml -->
+    <string name="tools_text_sample_name">Alain Rodriguez Brizuela</string>
+    <string name="tools_text_sample_email">abrizuela@casfid.com</string>
+    <string name="tools_text_sample_phone">+34 697 78 54 89</string>
+    <string name="tools_text_sample_cell">9784 897 78</string>
+    <string name="tools_text_sample_country">Cuba</string>
+    <string name="tools_text_sample_city">Alicante</string>
+    <string name="tools_text_sample_postcode">03660</string>
+    <string name="tools_text_sample_gender">Masculino</string>
+    <string name="tools_text_sample_age">45</string>
+    <string name="tools_text_sample_birthday">15/04/1979</string>
+
+    <!-- tools:text for dialog_qr.xml -->
+    <string name="tools_text_title_dialog_qr">Escanear QR para agregar contacto</string>
+    <string name="tools_text_btn_close_dialog_qr">Cerrar</string>
+    <string name="person_list_title">Personas encontradas</string>
+    <string name="contact_list_subtitle">Agrega a tu amigo</string>
+    <string name="back_button_description">atras</string>
+</resources>

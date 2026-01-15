@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.FoundYou" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.FoundYou" parent="Base.Theme.FoundYou" />
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Fondo del splash -->
+        <item name="windowSplashScreenBackground">@color/white</item>
+        
+        <!-- Usamos el foreground del launcher porque ya tiene el tamaño y escala correctos (108dp) -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app</item>
+        
+        <!-- Duración del splash -->
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        
+        <!-- Tema al que cambiará después del splash -->
+        <item name="postSplashScreenTheme">@style/Theme.FoundYou</item>
+    </style>
+</resources>

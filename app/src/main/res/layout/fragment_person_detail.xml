@@ -1,0 +1,309 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.fragment.PersonDetailFragment">
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back"
+        android:contentDescription="@string/back_button_description"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp" />
+
+    <ImageView
+        android:id="@+id/detail_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/content_description_profile_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/nopersona" />
+
+    <TextView
+        android:id="@+id/detail_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_image"
+        tools:text="@string/tools_text_sample_name" />
+
+    <LinearLayout
+        android:id="@+id/layout_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_name">
+
+        <Button
+            android:id="@+id/btn_add_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_contact_to_agenda" />
+
+        <ImageView
+            android:id="@+id/qr_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:contentDescription="@string/content_description_qr_code"
+            android:src="@drawable/qr"
+            app:tint="?attr/colorOnSurface" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/details_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_actions">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/mail_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/content_description_email_icon"
+                android:src="@drawable/mail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorPrimary" />
+
+
+            <ImageView
+                android:id="@+id/phone_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_phone_icon"
+                android:src="@drawable/phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mail_image"
+                app:tint="?attr/colorPrimary" />
+
+
+            <ImageView
+                android:id="@+id/cell_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_cell_icon"
+                android:src="@drawable/cell"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone_image"
+                app:tint="?attr/colorPrimary" />
+
+
+            <ImageView
+                android:id="@+id/country_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_country_icon"
+                android:src="@drawable/country"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cell_image"
+                app:tint="?attr/colorPrimary" />
+
+
+            <ImageView
+                android:id="@+id/city_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_city_icon"
+                android:src="@drawable/city"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/country_image"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/postcode_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_postcode_icon"
+                android:src="@drawable/potcode"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/city_image"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/gender_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_gender_icon"
+                android:src="@drawable/genero"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postcode_image"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/age_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_age_icon"
+                android:src="@drawable/age"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gender_image"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/birthay_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:contentDescription="@string/content_description_birthday_icon"
+                android:src="@drawable/birthay"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age_image"
+                app:tint="?attr/colorPrimary" />
+
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/icon_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="mail_image,phone_image,cell_image,country_image,city_image,postcode_image,gender_image,age_image,birthay_image" />
+
+            <!-- TEXTVIEWS -->
+            <TextView
+                android:id="@+id/detail_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/mail_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/mail_image"
+                tools:text="@string/tools_text_sample_email" />
+
+            <TextView
+                android:id="@+id/detail_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/phone_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/phone_image"
+                tools:text="@string/tools_text_sample_phone" />
+
+            <TextView
+                android:id="@+id/detail_cell"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/cell_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/cell_image"
+                tools:text="@string/tools_text_sample_cell" />
+
+            <TextView
+                android:id="@+id/detail_country"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/country_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/country_image"
+                tools:text="@string/tools_text_sample_country" />
+
+            <TextView
+                android:id="@+id/detail_city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/city_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/city_image"
+                tools:text="@string/tools_text_sample_city" />
+
+            <TextView
+                android:id="@+id/detail_postcode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/postcode_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/postcode_image"
+                tools:text="@string/tools_text_sample_postcode" />
+
+            <TextView
+                android:id="@+id/detail_gender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/gender_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/gender_image"
+                tools:text="@string/tools_text_sample_gender" />
+
+            <TextView
+                android:id="@+id/detail_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/age_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/age_image"
+                tools:text="@string/tools_text_sample_age" />
+
+            <TextView
+                android:id="@+id/detail_birthday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintBottom_toBottomOf="@+id/birthay_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/icon_barrier"
+                app:layout_constraintTop_toTopOf="@+id/birthay_image"
+                tools:text="@string/tools_text_sample_birthday" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
