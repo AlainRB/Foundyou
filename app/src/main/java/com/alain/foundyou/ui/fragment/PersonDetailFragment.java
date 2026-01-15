@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.alain.foundyou.R;
 import com.alain.foundyou.databinding.FragmentPersonDetailBinding;
@@ -26,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class PersonDetailFragment extends Fragment {
 
-    private FragmentPersonDetailBinding binding;
+
     private ImageView detailImage;
     private TextView detailName;
     private TextView detailEmail;
@@ -39,10 +42,10 @@ public class PersonDetailFragment extends Fragment {
     private TextView detailAge;
     private TextView detailPostcode;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        FragmentPersonDetailBinding binding;
         binding = FragmentPersonDetailBinding.inflate(inflater, container, false);
 
         detailImage = binding.detailImage;
@@ -56,6 +59,12 @@ public class PersonDetailFragment extends Fragment {
         detailGender = binding.detailGender;
         detailAge = binding.detailAge;
         detailPostcode = binding.detailPostcode;
+        ImageButton backButton = binding.backButton;
+
+        backButton.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(binding.getRoot());
+            navController.navigateUp();
+        });
 
         return binding.getRoot();
     }

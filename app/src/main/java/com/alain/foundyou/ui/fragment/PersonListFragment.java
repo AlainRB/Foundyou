@@ -42,7 +42,7 @@ public class PersonListFragment extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(PersonListViewModel.class);
 
-        setupRecyclerView(view);
+        setupRecyclerView();
         setupSwipeToRefresh();
         setupObservers();
 
@@ -54,9 +54,6 @@ public class PersonListFragment extends Fragment {
         binding.recyclerViewPersons.setAdapter(adapter);
 
         adapter.setOnItemClickListener(person -> {
-            // Ahora tienes el objeto 'post' y el NavController en el mismo lugar.
-
-            // Crea el Bundle para pasar los datos
             Bundle bundle = new Bundle();
             bundle.putString("personName",person.getName().getTitle()+" "+person.getName().getFirst()+" "+person.getName().getLast());
             bundle.putString("personEmail",person.getEmail());

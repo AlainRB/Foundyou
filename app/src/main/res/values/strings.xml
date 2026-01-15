@@ -49,4 +49,5 @@
     <string name="tools_text_sample_gender">Masculino</string>
     <string name="tools_text_sample_age">45</string>
     <string name="tools_text_sample_birthday">15/04/1979</string>
+    <string name="back_button_description">Ir atras</string>
 </resources>

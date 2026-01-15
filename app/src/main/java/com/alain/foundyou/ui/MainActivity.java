@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
+
 
 import com.alain.foundyou.R;
 import com.alain.foundyou.databinding.ActivityMainBinding;
@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 1. Instalar el Splash Screen antes de super.onCreate
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         PersonListViewModel viewModel = new ViewModelProvider(this).get(PersonListViewModel.class);
         splashScreen.setKeepOnScreenCondition(() -> {

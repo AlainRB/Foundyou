@@ -14,6 +14,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -34,23 +35,24 @@ public class PersonListViewModel extends ViewModel {
     @Inject
     public PersonListViewModel(PersonRepository personRepository) {
         this.personRepository = personRepository;
-        observePersonsFromRepository();
-        refreshData();
+        checkDatabaseAndLoadData();
     }
-
-    private void observePersonsFromRepository() {
+    private void checkDatabaseAndLoadData() {
         disposables.add(
-                // El repositorio ya nos da un flujo del tipo de dato que necesitamos (List<Person>)
-                personRepository.getPersons()// Devuelve Flowable<List<Person>>
+                personRepository.getPersons()
                         .subscribeOn(Schedulers.io())
-                        // .observeOn(AndroidSchedulers.mainThread()) // Es buena práctica cambiar al hilo principal antes de actualizar la UI
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                personList -> _persons.postValue(personList), // ¡Directo! Sin mapeo.
-                                throwable -> _error.postValue("Error al leer los datos: " + throwable.getMessage())
+                                personList -> {
+                                    _persons.setValue(personList);
+                                    if (personList.isEmpty()) {
+                                        refreshData();
+                                    }
+                                },
+                                throwable -> _error.setValue("Error al leer los datos de la base de datos: " + throwable.getMessage())
                         )
         );
     }
-
     public void refreshData() {
         disposables.add(
                 personRepository.refreshPersons()
@@ -70,6 +72,6 @@ public class PersonListViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        disposables.clear(); // Muy importante para evitar memory leaks
+        disposables.clear();
     }
 }
